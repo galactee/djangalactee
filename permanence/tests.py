@@ -1,3 +1,6 @@
-# from django.test import TestCase
+from django.test import TestCase
 
-# Create your tests here.
+
+class myFirstTest(TestCase):
+    def test_true_is_not_false(self):
+        self.assertTrue(True)
