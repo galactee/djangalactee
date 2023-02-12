@@ -1,3 +1,19 @@
-# from django.contrib import admin
+from django.contrib import admin
 
-# Register your models here.
+from common.models import Benevole
+
+
+class BenevoleAdmin(admin.ModelAdmin):
+    list_display = (
+        "email",
+        "first_name",
+        "last_name",
+        "statut",
+        "is_staff",
+        "is_active",
+    )
+
+    list_filter = ("is_active", "statut")
+
+
+admin.site.register(Benevole, BenevoleAdmin)
