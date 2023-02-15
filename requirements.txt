@@ -1,4 +1,4 @@
-Django==4.1.6
+Django==4.1.7
 python-dotenv==0.21.0
 pre-commit==2.20.0
 flake8==5.0.4
