@@ -1,3 +1,8 @@
-# from django.contrib import admin
+from django.contrib import admin
 
-# Register your models here.
+from permanence.models import PermanenceDay
+
+
+@admin.register(PermanenceDay)
+class PermanenceDayAdmin(admin.ModelAdmin):
+    pass
