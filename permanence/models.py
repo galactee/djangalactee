@@ -11,6 +11,20 @@ class PermanenceDay(models.Model):
     objects = PermanenceDayManager
     date = models.DateField(unique=True)
 
+    @property
+    def inscrites(self):
+        return list(filter(None, (self.inscrite_at_position(i) for i in range(1, 5))))
+
+    def inscrite_at_position(self, position):
+        if position == 1:
+            return self.inscrite_1
+        if position == 2:
+            return self.inscrite_2
+        if position == 3:
+            return self.inscrite_3
+        if position == 4:
+            return self.inscrite_4
+
     inscrite_1 = models.ForeignKey(
         Benevole, on_delete=models.SET_NULL, null=True, related_name="+"
     )
