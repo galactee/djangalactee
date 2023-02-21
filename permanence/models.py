@@ -4,11 +4,12 @@ from common.models import Benevole
 
 
 class PermanenceDayManager(models.Manager):
-    pass
+    def for_given_month(self, year, month):
+        return self.filter(date__year=year, date__month=month).order_by("date")
 
 
 class PermanenceDay(models.Model):
-    objects = PermanenceDayManager
+    objects = PermanenceDayManager()
     date = models.DateField(unique=True)
 
     @property
