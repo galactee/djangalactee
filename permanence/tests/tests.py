@@ -36,38 +36,45 @@ class PermanenceCountTest(TestCase):
         cls.benevole_marie = BenevoleFactory(first_name="Marie", last_name="Covert")
         cls.benevole_noelle = BenevoleFactory(first_name="Noëlle", last_name="Mer")
         cls.benevole_olivia = BenevoleFactory(first_name="Olivia", last_name="Roly")
+        cls.benevole_philomene = BenevoleFactory(
+            first_name="Philomène", last_name="Aqua"
+        )
+
+        PermanenceDayFactory(
+            date="2023-02-09",
+            inscrite_1=cls.benevole_marie,
+            inscrite_3=cls.benevole_olivia,
+        )
+        PermanenceDayFactory(
+            date="2023-02-01",
+            inscrite_2=cls.benevole_marie,
+        )
+        PermanenceDayFactory(
+            date="2023-02-28",
+            inscrite_2=cls.benevole_olivia,
+            inscrite_3=cls.benevole_marie,
+            inscrite_4=cls.benevole_noelle,
+        )
+        PermanenceDayFactory(
+            date="2023-03-28",
+            inscrite_3=cls.benevole_olivia,
+            inscrite_4=cls.benevole_marie,
+        )
 
     def test_get_inscriptions_for_february_2023(self):
-        def construct_data():
-            # three inscriptions in february, will be in result
-            PermanenceDayFactory(
-                date="2023-02-09",
-                inscrite_1=self.benevole_marie,
-                inscrite_3=self.benevole_olivia,
-            )
-            PermanenceDayFactory(
-                date="2023-02-01",
-                inscrite_2=self.benevole_marie,
-                inscrite_4=self.benevole_noelle,
-            )
-            PermanenceDayFactory(
-                date="2023-02-28",
-                inscrite_2=self.benevole_marie,
-                inscrite_3=self.benevole_olivia,
-                inscrite_4=self.benevole_noelle,
-            )
-            # one inscription in march, should not be in result
-            PermanenceDayFactory(
-                date="2023-03-28",
-                inscrite_2=self.benevole_marie,
-                inscrite_3=self.benevole_olivia,
-                inscrite_4=self.benevole_noelle,
-            )
-
-        construct_data()
-
         self.assertEqual(PermanenceDay.objects.count(), 4)
         self.assertEqual(PermanenceDay.objects.for_given_month(2023, 2).count(), 3)
 
-    def test_next_inscriptions_for_benevole(self):
-        pass
+    def test_inscriptions_for_benevole(self):
+        self.assertEqual(
+            4, PermanenceDay.objects.for_benevole(self.benevole_marie).count()
+        )
+        self.assertEqual(
+            3, PermanenceDay.objects.for_benevole(self.benevole_olivia).count()
+        )
+        self.assertEqual(
+            1, PermanenceDay.objects.for_benevole(self.benevole_noelle).count()
+        )
+        self.assertEqual(
+            0, PermanenceDay.objects.for_benevole(self.benevole_philomene).count()
+        )

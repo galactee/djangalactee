@@ -1,4 +1,7 @@
+from datetime import date
+
 from django.db import models
+from django.db.models import Q
 
 from common.models import Benevole
 
@@ -6,6 +9,17 @@ from common.models import Benevole
 class PermanenceDayManager(models.Manager):
     def for_given_month(self, year, month):
         return self.filter(date__year=year, date__month=month).order_by("date")
+
+    def for_benevole(self, benevole: Benevole):
+        return self.filter(
+            Q(inscrite_1=benevole)
+            | Q(inscrite_2=benevole)
+            | Q(inscrite_3=benevole)
+            | Q(inscrite_4=benevole)
+        )
+
+    def future(self):
+        return self.filter(date__gte=date.today())
 
 
 class PermanenceDay(models.Model):
