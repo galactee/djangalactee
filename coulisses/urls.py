@@ -8,6 +8,7 @@ urlpatterns = [
         login_required(TemplateView.as_view(template_name="coulisses/bonjour.html")),
     ),
     path("compte/", include("django.contrib.auth.urls")),
+    path("check/", TemplateView.as_view(template_name="coulisses/check.html")),
 ]
 
 """

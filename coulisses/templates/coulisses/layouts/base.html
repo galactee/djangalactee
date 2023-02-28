@@ -1,14 +1,31 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html lang="fr">
 <head>
     <title>{% block title %}Galactée - coulisses{% endblock %}</title>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="{% static "coulisses/css/fontawesome-all.min.css" %}">
     <link rel="stylesheet" href="{% static "coulisses.css" %}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic|Source+Code+Pro:400">
 </head>
-<body class="{% block body_class %}{% endblock %}">
-{% block content %}
+<body class="is-preload {% block body_class %}{% endblock %}">
+{% block body %}
 {% endblock %}
+
+<!-- Scripts -->
+<script src="{% static "coulisses/js/jquery.min.js" %}"></script>
+<script src="{% static "coulisses/js/browser.min.js" %}"></script>
+<script src="{% static "coulisses/js/breakpoints.min.js" %}"></script>
+<script src="{% static "coulisses/js/util.js" %}"></script>
+<script src="{% static "coulisses/js/main.js" %}"></script>
 </body>
 </html>
