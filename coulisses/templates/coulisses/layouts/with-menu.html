@@ -1,101 +1,79 @@
-{% extends "coulisses/layouts/base.html" %}
-
-{% block body %}
+{% extends "coulisses/layouts/base.html" %} {% block body %}
 <!-- Header -->
 <section id="header">
-    <p>
-        <a href="#">
-            <i class="icon solid fa-person-to-door"></i>
-            Déconnexion
+  <p>
+    <a href="{% url 'logout' %}">
+      <i class="icon solid fa-sign-out"></i>
+      Déconnexion
+    </a>
+  </p>
+  <nav id="nav">
+    <ul>
+      <li>
+        <a href="#one" class="active">
+          <i class="icon solid fa-chart-pie"></i>
+          Tableau de bord</a
+        >
+      </li>
+      <li>
+        <a href="#two">
+          <i class="icon solid fa-phone"></i>
+          Permanence téléphonique</a
+        >
+      </li>
+      <li>
+        <a href="#three">
+          <i class="icon solid fa-couch"></i>
+          Réunions
         </a>
-    </p>
-    <nav id="nav">
         <ul>
-            <li>
-                <a href="#one" class="active">
-                    <i class="icon solid fa-chart-pie"></i>
-                    Tableau de bord</a
-                >
-            </li>
-            <li>
-                <a href="#two">
-                    <i class="icon solid fa-phone"></i>
-                    Permanence téléphonique</a
-                >
-            </li>
-            <li>
-                <a href="#three">
-                    <i class="icon solid fa-couch"></i>
-                    Réunions
-                </a>
-                <ul>
-                    <li><a href="#">Réunions à thème</a></li>
-                    <li><a href="#">Réunions de secteur</a></li>
-                    <li><a href="#">Générer un PDF</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#four">
-                    <i class="icon solid fa-chart-line"></i>
-                    Saisie des chiffres
-                </a>
-            </li>
-            <li>
-                <a href="#blog">
-                    <i class="icon solid fa-feather"></i>
-                    Blog
-                </a>
-            </li>
-            <li>
-                <a href="#compte">
-                    <i class="icon solid fa-address-card"></i>
-                    Mon compte
-                </a>
-            </li>
+          <li><a href="#">Réunions à thème</a></li>
+          <li><a href="#">Réunions de secteur</a></li>
+          <li><a href="#">Générer un PDF</a></li>
         </ul>
-        <hr/>
-        Administration
-        <ul>
-            <li>
-                <a href="#two">
-                    <i class="icon solid fa-users"></i>
-                    Voir les bénévoles</a
-                >
-            </li>
-            <li>
-                <a href="#two"
-                ><i class="fas fa-users-medical"></i>
-                    <i class="icon solid fa-users-medical"></i>
-                    Ajouter une bénévole</a
-                >
-            </li>
-            <li><a href="#four">Saisie des chiffres</a></li>
-            <li><a href="#blog">Blog</a></li>
-        </ul>
-    </nav>
+      </li>
+      <li>
+        <a href="#four">
+          <i class="icon solid fa-chart-line"></i>
+          Saisie des chiffres
+        </a>
+      </li>
+      <li>
+        <a href="#blog">
+          <i class="icon solid fa-feather"></i>
+          Blog
+        </a>
+      </li>
+      <li>
+        <a href="#compte">
+          <i class="icon solid fa-address-card"></i>
+          Mon compte
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'admin:index' %}">
+          <i class="icon solid fa-cog"></i>
+          Administration
+        </a>
+      </li>
+    </ul>
+  </nav>
 </section>
 
-<!-- Wrapper -->
 <div id="wrapper">
-    <!-- Main -->
-    <div id="main">
+  <div id="main">{% block content %} {% endblock %}</div>
 
-        {% block content %}
-        {% endblock %}
+  <section id="footer">
+    <div class="container">
+      <ul class="copyright">
+        <li>&copy; Galactée.</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+      </ul>
     </div>
-
-    <!-- Footer -->
-    <section id="footer">
-        <div class="container">
-            <ul class="copyright">
-                <li>&copy; Galactée.</li>
-                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-            </ul>
-        </div>
-    </section>
+  </section>
 </div>
 <div id="titleBar">
-    <a href="#header" class="toggle"></a>
-    <span class="title"><a href="#">Willis Corto</a></span>
+  <a href="#header" class="toggle"></a>
+  <span class="title"><a href="#">Willis Corto</a></span>
 </div>
 {% endblock %}

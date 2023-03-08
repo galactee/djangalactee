@@ -6,32 +6,26 @@
 
     <div class="login-wrap">
         {% if form.errors %}
-            <p>Je n'ai pas réussi à vous connecter :(</p>
         {% endif %}
 
-        {% if next %}
-            {% if user.is_authenticated %}
-                <p>Your account doesn't have access to this page. To proceed,
-                    please login with an account that has access.</p>
-            {% else %}
-                <p>Connectez-vous aux coulisses de Galactée !</p>
-            {% endif %}
-        {% endif %}
+        <h2>Bienvenue dans les coulisses de Galactée !</h2>
+        <p class="error">Je n'ai pas réussi à vous connecter :(</p>
 
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
-            <table>
-                <tr>
-                    <td>{{ form.username.label_tag }}</td>
-                    <td>{{ form.username }}</td>
-                </tr>
-                <tr>
-                    <td>{{ form.password.label_tag }}</td>
-                    <td>{{ form.password }}</td>
-                </tr>
-            </table>
-
-            <button type="submit">Connexion !</button>
+            <div class="row gtr-uniform">
+                <div class="col-6 col-12-xsmall">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+                <div class="col-6 col-12-xsmall">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                </div>
+                <div class="col-12">
+                    <button class="button primary" type="submit">Connexion !</button>
+                </div>
+            </div>
             <input type="hidden" name="next" value="{{ next }}">
         </form>
 
