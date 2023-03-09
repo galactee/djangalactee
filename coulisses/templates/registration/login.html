@@ -1,0 +1,36 @@
+{% extends "coulisses/layouts/base.html" %}
+
+{% block body_class %}login_page{% endblock %}
+
+{% block body %}
+
+    <div class="login-wrap">
+        {% if form.errors %}
+        {% endif %}
+
+        <h2>Bienvenue dans les coulisses de Galactée !</h2>
+        <p class="error">Je n'ai pas réussi à vous connecter :(</p>
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="row gtr-uniform">
+                <div class="col-6 col-12-xsmall">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+                <div class="col-6 col-12-xsmall">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                </div>
+                <div class="col-12">
+                    <button class="button primary" type="submit">Connexion !</button>
+                </div>
+            </div>
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+
+        <p><a href="{% url 'password_reset' %}">Vous avez perdu ou oublié votre mot de passe ?</a></p>
+
+    </div>
+
+{% endblock %}
