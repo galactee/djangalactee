@@ -26,6 +26,9 @@ class PermanenceDay(models.Model):
     objects = PermanenceDayManager()
     date = models.DateField(unique=True)
 
+    def __str__(self):
+        return self.date.strftime("%A %d %B %Y")
+
     @property
     def inscrites(self):
         return list(filter(None, (self.inscrite_at_position(i) for i in range(1, 5))))
@@ -41,24 +44,44 @@ class PermanenceDay(models.Model):
             return self.inscrite_4
 
     inscrite_1 = models.ForeignKey(
-        Benevole, on_delete=models.SET_NULL, null=True, related_name="+"
+        Benevole, on_delete=models.SET_NULL, null=True, blank=True, related_name="+"
     )
     inscrite_2 = models.ForeignKey(
-        Benevole, on_delete=models.SET_NULL, null=True, related_name="+"
+        Benevole, on_delete=models.SET_NULL, null=True, blank=True, related_name="+"
     )
     inscrite_3 = models.ForeignKey(
-        Benevole, on_delete=models.SET_NULL, null=True, related_name="+"
+        Benevole, on_delete=models.SET_NULL, null=True, blank=True, related_name="+"
     )
     inscrite_4 = models.ForeignKey(
-        Benevole, on_delete=models.SET_NULL, null=True, related_name="+"
+        Benevole, on_delete=models.SET_NULL, null=True, blank=True, related_name="+"
     )
 
-    call_amount_1 = models.PositiveSmallIntegerField(null=True)
-    call_amount_2 = models.PositiveSmallIntegerField(null=True)
-    call_amount_3 = models.PositiveSmallIntegerField(null=True)
-    call_amount_4 = models.PositiveSmallIntegerField(null=True)
+    call_amount_1 = models.PositiveSmallIntegerField(
+        "Nombre d'appels 1", blank=True, null=True
+    )
+    call_amount_2 = models.PositiveSmallIntegerField(
+        "Nombre d'appels 2", blank=True, null=True
+    )
+    call_amount_3 = models.PositiveSmallIntegerField(
+        "Nombre d'appels 3", blank=True, null=True
+    )
+    call_amount_4 = models.PositiveSmallIntegerField(
+        "Nombre d'appels 4", blank=True, null=True
+    )
 
-    call_duration_1 = models.PositiveSmallIntegerField(null=True)
-    call_duration_2 = models.PositiveSmallIntegerField(null=True)
-    call_duration_3 = models.PositiveSmallIntegerField(null=True)
-    call_duration_4 = models.PositiveSmallIntegerField(null=True)
+    call_duration_1 = models.PositiveSmallIntegerField(
+        "Durée d'appel 1", blank=True, null=True
+    )
+    call_duration_2 = models.PositiveSmallIntegerField(
+        "Durée d'appel 2", blank=True, null=True
+    )
+    call_duration_3 = models.PositiveSmallIntegerField(
+        "Durée d'appel 3", blank=True, null=True
+    )
+    call_duration_4 = models.PositiveSmallIntegerField(
+        "Durée d'appel 4", blank=True, null=True
+    )
+
+    class Meta:
+        verbose_name = "Jour de Permanence"
+        verbose_name_plural = "Jours de Permanence"
